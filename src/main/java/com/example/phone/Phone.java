@@ -102,9 +102,9 @@ public class Phone extends Application {
 
         HBox row6 = new HBox();
         Button starButton = createButton("*");
-        Button Button0 = createButton("0");
+        Button button0 = createButton("0");
         Button hashButton = createButton("#");
-        row6.getChildren().addAll(starButton, Button0, hashButton);
+        row6.getChildren().addAll(starButton, button0, hashButton);
 
         root.getChildren().addAll(text, buttonText, row1, row2, row3, row4, row5, row6);
 
@@ -117,12 +117,24 @@ public class Phone extends Application {
         setDigitButtonAction(button7, text, "7");
         setDigitButtonAction(button8, text, "8");
         setDigitButtonAction(button9, text, "9");
+        setDigitButtonAction(starButton, text, "*");
+        setDigitButtonAction(button0, text, "0");
+        setDigitButtonAction(hashButton, text, "#");
 
         canselButton.setOnAction(event -> {
             String currentText = text.getText();
             text.setText((currentText == null || currentText.length() == 0)
                     ? ""
                     : (currentText.substring(0, currentText.length() - 1)));
+        });
+
+        callButton.setOnAction(event -> {
+            String currentNumber = text.getText();
+            text.setText("Calling " + currentNumber + " . . .");
+        });
+
+        endCallButton.setOnAction(event -> {
+            text.setText("");
         });
 
         Scene scene = new Scene(root, windowWidth, windowHeight);
